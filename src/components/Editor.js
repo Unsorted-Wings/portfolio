@@ -41,7 +41,7 @@ const Editor = () => {
             ) : (
               <FaFolder className="mr-1" />
             )}
-            <span className="text-white">Rohit's Portfolio</span>
+            <span className="text-white">Rohit&apos;s Portfolio</span>
           </div>
           <ul
             className={`text-white space-y-2 ml-10 max-h-0 overflow-hidden transition-max-height duration-500 ease-in-out ${
@@ -91,26 +91,26 @@ const Editor = () => {
             <div className=" w-1/2 mb-2">
               <h1 className="text-3xl font-bold mb-2">About Me</h1>
               <p className="mb-2 text-gray-500 leading-loose">
-                I'm a passionate developer with expertise in web development and
+                I&apos;m a passionate developer with expertise in web development and
                 mobile app development. I have experience working with various
                 technologies and frameworks to build innovative solutions for
                 real-world problems.
               </p>
               <p className="mb-2 text-gray-500 leading-loose">
-                Currently, I'm focusing on enhancing my skills in front-end and
+                Currently, I&apos;m focusing on enhancing my skills in front-end and
                 back-end development using technologies like React, Node.js, and
                 MongoDB.
               </p>
               <p className="mb-2 text-gray-500 leading-loose">
                 Besides coding, I enjoy learning new languages, traveling, and
-                spending time outdoors. I'm always open to new opportunities and
+                spending time outdoors. I&apos;m always open to new opportunities and
                 challenges that allow me to grow both personally and
                 professionally.
               </p>
               <p className="mb-2 text-gray-500 leading-loose">
                 Feel free to explore my portfolio to learn more about my
                 projects and experiences. If you have any questions or would
-                like to collaborate, don't hesitate to reach out!
+                like to collaborate, don&apos;t hesitate to reach out!
               </p>
             </div>
             <div className="flex flex-col w-1/2 justify-center items-center m-auto">
@@ -362,7 +362,7 @@ const Editor = () => {
             <br />
             <span className="prompt text-green-500 font-bold">&gt; user</span>
             <br />
-            <span className="output text-gray-400">Hi, I'm Rohit...</span>
+            <span className="output text-gray-400">Hi, I&apos;m Rohit...</span>
             <br />
             <span className="output text-gray-400">
               I enjoy coding, exploring new technologies, and building
