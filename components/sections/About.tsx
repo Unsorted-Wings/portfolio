@@ -18,7 +18,7 @@ const About: React.FC = () => {
         <div className="max-w-2xl"> {/* Limit the width */}
           <h2 className="text-4xl font-bold text-blue-500 mb-4">About Me</h2>
           <p className="text-gray-300 mb-2">
-            Hi, I'm <span className="font-semibold text-white">Rohit Shukla</span>, a passionate developer from Ahmedabad, Gujarat. I'm currently pursuing a bachelor's degree in <span className="font-semibold text-white">BSc Computer Science</span> from the Department of Computer Science, Gujarat University.
+            Hi, I&apos;m <span className="font-semibold text-white">Rohit Shukla</span>, a passionate developer from Ahmedabad, Gujarat. I&apos;m currently pursuing a bachelor&apos;s degree in <span className="font-semibold text-white">BSc Computer Science</span> from the Department of Computer Science, Gujarat University.
           </p>
           <p className="text-gray-300 mb-2">
             I specialize in <span className="font-semibold text-white">MERN stack</span> development and <span className="font-semibold text-white">Next.js</span>, and I love building modern looking web applications. I am open to exploring and working with different tech stacks to expand my expertise.
