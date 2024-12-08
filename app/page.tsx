@@ -11,9 +11,9 @@ const Home: React.FC = () => {
 
   const content: Record<string, JSX.Element> = {
     'README.md': <About />,
-    'projects.cpp': <Projects />,
-    'skills.cpp': <Skills />,
-    'experience.cpp': <Experience />,
+    'Projects.cpp': <Projects />,
+    'Skills.cpp': <Skills />,
+    'Experience.cpp': <Experience />,
   };
 
   return (
