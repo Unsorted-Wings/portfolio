@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaFileAlt, FaCode, FaCogs, FaBriefcase } from 'react-icons/fa';
-import Terminal from './sections/Terminal';
+import Terminal from "@/components/sections/Terminal";
 
 interface LayoutProps {
   children: React.ReactNode;
