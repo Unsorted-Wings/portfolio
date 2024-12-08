@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import photo from '@/assets/photo.jpg';
 
 const About: React.FC = () => {
   return (
@@ -9,7 +8,7 @@ const About: React.FC = () => {
         {/* Profile Photo */}
         <div className="w-[10rem] h-[12rem] my-10 md:mb-0 md:mr-6 rounded-full overflow-hidden border-4 border-blue-500 shadow-lg">
           <Image
-            src={photo}
+            src="/assets/photo.jpg"
             alt="Rohit Shukla"
             className="object-cover w-full h-full"
           />
