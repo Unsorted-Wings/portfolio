@@ -10,6 +10,8 @@ const About: React.FC = () => {
           <Image
             src="/assets/photo.jpg"
             alt="Rohit Shukla"
+            width={500}
+            height={500}
             className="object-cover w-full h-full"
           />
         </div>

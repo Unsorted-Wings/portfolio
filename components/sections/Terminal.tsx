@@ -6,6 +6,8 @@ const Terminal: React.FC = () => {
     'Welcome to my portfolio!',
     'Type "help" for available commands.',
   ]);
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState<number | null>(null);
 
   const terminalRef = useRef<HTMLDivElement>(null);
 
@@ -58,7 +60,28 @@ const Terminal: React.FC = () => {
         `$ ${input}`,
         ...newOutput,
       ]);
+      setCommandHistory((prev) => [...prev, input]); // Store command in history
+      setHistoryIndex(null); // Reset history index
       setInput('');
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowUp') {
+      if (historyIndex === null) {
+        setHistoryIndex(commandHistory.length - 1);
+      } else if (historyIndex > 0) {
+        setHistoryIndex(historyIndex - 1);
+      }
+      setInput(commandHistory[historyIndex ?? 0] || '');
+    } else if (e.key === 'ArrowDown') {
+      if (historyIndex !== null && historyIndex < commandHistory.length - 1) {
+        setHistoryIndex(historyIndex + 1);
+        setInput(commandHistory[historyIndex + 1]);
+      } else {
+        setHistoryIndex(null);
+        setInput('');
+      }
     }
   };
 
@@ -99,6 +122,7 @@ const Terminal: React.FC = () => {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown} // Handle key down for command history
           className="flex-1 bg-transparent border-none focus:outline-none text-gray-100 text-sm placeholder-gray-500"
           autoFocus
           placeholder="Type your command..."
