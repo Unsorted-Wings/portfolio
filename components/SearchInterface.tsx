@@ -174,6 +174,37 @@ export default function SearchInterface() {
 
   const currentResult = findMatchingResult(currentQuery);
 
+  // Get gradient colors based on query type
+  const getGradientColors = (query: string) => {
+    const normalizedQuery = query.toLowerCase();
+    
+    if (normalizedQuery.includes("who is") || normalizedQuery.includes("rohit?")) {
+      return "from-blue-500 via-blue-400 to-purple-500"; // Blue to purple for identity
+    } else if (normalizedQuery.includes("experience") || normalizedQuery.includes("journey")) {
+      return "from-green-500 via-emerald-400 to-teal-500"; // Green tones for experience
+    } else if (normalizedQuery.includes("projects") || normalizedQuery.includes("best")) {
+      return "from-purple-500 via-pink-400 to-rose-500"; // Purple to pink for projects
+    } else if (normalizedQuery.includes("skills") || normalizedQuery.includes("technical")) {
+      return "from-orange-500 via-amber-400 to-yellow-500"; // Orange to yellow for skills
+    } else if (normalizedQuery.includes("contact") || normalizedQuery.includes("connect")) {
+      return "from-cyan-500 via-sky-400 to-blue-500"; // Cyan to blue for contact
+    } else if (normalizedQuery.includes("achievements") || normalizedQuery.includes("accomplishments")) {
+      return "from-violet-500 via-indigo-400 to-purple-500"; // Violet tones for achievements
+    } else if (normalizedQuery.includes("culture") || normalizedQuery.includes("team")) {
+      return "from-pink-500 via-rose-400 to-red-500"; // Pink to red for culture
+    } else if (normalizedQuery.includes("goals") || normalizedQuery.includes("future") || normalizedQuery.includes("vision")) {
+      return "from-indigo-500 via-blue-400 to-cyan-500"; // Indigo to cyan for future goals
+    } else if (normalizedQuery.includes("leadership") || normalizedQuery.includes("style")) {
+      return "from-emerald-500 via-green-400 to-lime-500"; // Emerald to lime for leadership
+    } else if (normalizedQuery.includes("innovative") || normalizedQuery.includes("solutions")) {
+      return "from-teal-500 via-cyan-400 to-sky-500"; // Teal to sky for innovation
+    } else {
+      return "from-primary via-primary/80 to-primary/60"; // Default primary gradient
+    }
+  };
+
+  const gradientColors = getGradientColors(currentQuery);
+
   if (isLoading) {
     return <LoadingAnimation />;
   }
@@ -394,33 +425,14 @@ export default function SearchInterface() {
             >
             {currentResult ? (
               <Card className="overflow-hidden shadow-2xl bg-gradient-to-br from-card via-card to-card/50 backdrop-blur-md border border-border/50 hover:border-primary/30 transition-all duration-500 hover:shadow-3xl relative">
-                {/* Animated border gradient */}
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg" />
-                
-                {/* Floating particles effect */}
-                <div className="absolute inset-0 overflow-hidden rounded-lg">
-                  {[...Array(6)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute w-1 h-1 bg-primary/30 rounded-full"
-                      initial={{ 
-                        x: Math.random() * 100 + "%", 
-                        y: "100%",
-                        opacity: 0 
-                      }}
-                      animate={{ 
-                        y: "-10%",
-                        opacity: [0, 1, 0],
-                      }}
-                      transition={{
-                        duration: 3 + Math.random() * 2,
-                        repeat: Infinity,
-                        delay: i * 0.5,
-                        ease: "easeOut"
-                      }}
-                    />
-                  ))}
-                </div>
+                {/* Dynamic gradient top line based on query */}
+                <motion.div 
+                  className={`h-2 bg-gradient-to-r ${gradientColors} shadow-lg`}
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+                  style={{ transformOrigin: "left" }}
+                />
 
                 <CardContent className="p-0 relative z-10">
                   <div className="p-8 lg:p-10">
@@ -437,7 +449,7 @@ export default function SearchInterface() {
                         transition={{ type: "spring", stiffness: 300 }}
                       >
                         <div className="absolute inset-0 bg-primary/20 rounded-xl blur-xl group-hover/icon:blur-2xl transition-all duration-300" />
-                        <div className="relative p-4 rounded-xl bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-lg">
+                        <div className={`relative p-4 rounded-xl bg-gradient-to-br ${gradientColors.replace('from-', 'from-').replace(' via-', ' via-').replace(' to-', ' to-')} text-white shadow-lg`}>
                           {currentResult.icon}
                         </div>
                       </motion.div>
@@ -544,6 +556,15 @@ export default function SearchInterface() {
                 <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 via-transparent to-orange-500/20 opacity-30 rounded-lg" />
                 
                 <CardContent className="p-0 relative z-10">
+                  {/* Gradient top line for no results */}
+                  <motion.div 
+                    className="h-1 bg-gradient-to-r from-orange-500 via-orange-400 to-red-500"
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+                    style={{ transformOrigin: "left" }}
+                  />
+                  
                   <div className="p-8 lg:p-10 text-center">
                     {/* Not Found Header */}
                     <motion.div 
