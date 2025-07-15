@@ -2,26 +2,8 @@
 
 import { motion } from "framer-motion";
 import { Search, Code, Sparkles } from "lucide-react";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 
 export default function LoadingAnimation() {
-  const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  // Prevent hydration mismatch
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return (
-      <div className="fixed inset-0 bg-white dark:bg-slate-950 flex items-center justify-center z-50">
-        <div className="w-8 h-8 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin"></div>
-      </div>
-    );
-  }
-
   return (
     <div className="fixed inset-0 bg-background text-foreground flex items-center justify-center z-50">
       <div className="text-center">
