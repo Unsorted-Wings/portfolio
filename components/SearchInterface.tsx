@@ -193,7 +193,7 @@ export default function SearchInterface() {
               className="w-full max-w-2xl mb-8"
             >
               <div className="relative">
-                <div className="flex items-center bg-card rounded-full shadow-lg border border-border hover:shadow-xl transition-all duration-300 focus-within:shadow-xl focus-within:border-primary/50">
+                <div className="flex items-center bg-card rounded-full shadow-lg border border-border hover:shadow-xl transition-all duration-300 focus-within:shadow-xl focus-within:border-primary/50 backdrop-blur-sm">
                   <div className="pl-6">
                     <Search className="w-5 h-5 text-muted-foreground" />
                   </div>
@@ -275,7 +275,7 @@ export default function SearchInterface() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-background border-b border-border px-6 py-4"
+            className="bg-background border-b backdrop-blur-sm border-border px-6 pb-6"
           >
             <div className="max-w-7xl mx-auto flex items-center gap-6">
               {/* Compact logo and search */}

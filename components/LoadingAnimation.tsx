@@ -51,7 +51,7 @@ export default function LoadingAnimation() {
             />
           </motion.div>
 
-          {/* Floating Icons */}
+          {/* Original Floating Icons */}
           <motion.div
             className="absolute -top-2 -right-2 w-6 h-6 bg-accent text-accent-foreground rounded-full flex items-center justify-center border border-border shadow-sm"
             animate={{ 
@@ -73,6 +73,114 @@ export default function LoadingAnimation() {
           >
             <Sparkles className="w-3 h-3" />
           </motion.div>
+
+          {/* Additional scattered floating elements */}
+          <motion.div
+            className="absolute -top-4 left-1/2 w-4 h-4 bg-muted text-muted-foreground rounded-full flex items-center justify-center border border-border shadow-sm transform -translate-x-1/2"
+            animate={{ 
+              x: [0, 15, 0],
+              rotate: [0, 270, 0],
+              scale: [1, 1.2, 1]
+            }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+          >
+            <div className="w-2 h-2 bg-current rounded-full" />
+          </motion.div>
+
+          <motion.div
+            className="absolute -bottom-4 right-1/4 w-5 h-5 bg-primary/20 text-primary rounded-full flex items-center justify-center border border-border shadow-sm"
+            animate={{ 
+              y: [0, -15, 0],
+              rotate: [0, -180, 0],
+              scale: [1, 1.3, 1]
+            }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+          >
+            <div className="w-2.5 h-2.5 bg-current rounded-full" />
+          </motion.div>
+
+          <motion.div
+            className="absolute top-1/4 -left-6 w-4 h-4 bg-accent/30 text-accent rounded-full flex items-center justify-center border border-border shadow-sm"
+            animate={{ 
+              x: [0, -10, 0],
+              y: [0, 8, 0],
+              rotate: [0, 360, 0],
+              scale: [1, 1.1, 1]
+            }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+          >
+            <div className="w-1.5 h-1.5 bg-current rounded-full" />
+          </motion.div>
+
+          <motion.div
+            className="absolute top-3/4 -right-6 w-3 h-3 bg-secondary/40 text-secondary rounded-full flex items-center justify-center border border-border shadow-sm"
+            animate={{ 
+              x: [0, 12, 0],
+              y: [0, -12, 0],
+              rotate: [0, -270, 0],
+              scale: [1, 1.4, 1]
+            }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+          >
+            <div className="w-1 h-1 bg-current rounded-full" />
+          </motion.div>
+
+          <motion.div
+            className="absolute -top-6 left-1/4 w-3 h-3 bg-primary/30 rounded-full border border-border shadow-sm"
+            animate={{ 
+              y: [0, -8, 0],
+              x: [0, 5, 0],
+              rotate: [0, 180, 0],
+              scale: [0.8, 1.2, 0.8]
+            }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+          />
+
+          <motion.div
+            className="absolute bottom-1/3 -left-8 w-5 h-5 bg-muted/50 text-muted-foreground rounded-full flex items-center justify-center border border-border shadow-sm"
+            animate={{ 
+              x: [0, -8, 0],
+              rotate: [0, 360, 0],
+              scale: [1, 1.2, 1]
+            }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          >
+            <div className="w-2 h-2 bg-current rounded-full" />
+          </motion.div>
+
+          <motion.div
+            className="absolute top-1/3 -right-8 w-4 h-4 bg-accent/40 rounded-full border border-border shadow-sm"
+            animate={{ 
+              x: [0, 10, 0],
+              y: [0, 6, 0],
+              rotate: [0, -360, 0],
+              scale: [1, 1.3, 1]
+            }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.8 }}
+          />
+
+          {/* Small floating particles */}
+          <motion.div
+            className="absolute -top-8 -left-4 w-2 h-2 bg-primary/50 rounded-full"
+            animate={{
+              y: [0, -15, 0],
+              x: [0, -8, 0],
+              opacity: [0.5, 1, 0.5],
+              scale: [0.5, 1, 0.5]
+            }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2.5 }}
+          />
+
+          <motion.div
+            className="absolute -bottom-8 -right-4 w-2 h-2 bg-secondary/50 rounded-full"
+            animate={{
+              y: [0, 15, 0],
+              x: [0, 8, 0],
+              opacity: [0.5, 1, 0.5],
+              scale: [0.5, 1, 0.5]
+            }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          />
         </motion.div>
 
         {/* Loading Text with Typewriter Effect */}
