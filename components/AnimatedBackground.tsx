@@ -49,7 +49,10 @@ export default function AnimatedBackground() {
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, [isClient, cursorX, cursorY]);
 
   // Beam and particle animation logic
@@ -66,14 +69,28 @@ export default function AnimatedBackground() {
       // Start at a random grid column at the top
       const startX = Math.floor(Math.random() * (screenWidth / gridSize)) * gridSize;
       
-      // Random colors
+      // Extended color palette with more vibrant options
       const colors = [
-        'rgb(59, 130, 246)', // Blue
-        'rgb(16, 185, 129)', // Emerald
-        'rgb(139, 92, 246)', // Violet
-        'rgb(236, 72, 153)', // Pink
-        'rgb(251, 146, 60)', // Orange
-        'rgb(34, 197, 94)',  // Green
+        'rgb(59, 130, 246)',   // Blue
+        'rgb(16, 185, 129)',   // Emerald
+        'rgb(139, 92, 246)',   // Violet
+        'rgb(236, 72, 153)',   // Pink
+        'rgb(251, 146, 60)',   // Orange
+        'rgb(34, 197, 94)',    // Green
+        'rgb(245, 101, 101)',  // Red
+        'rgb(168, 85, 247)',   // Purple
+        'rgb(14, 165, 233)',   // Sky Blue
+        'rgb(132, 204, 22)',   // Lime
+        'rgb(234, 179, 8)',    // Yellow
+        'rgb(239, 68, 68)',    // Rose
+        'rgb(99, 102, 241)',   // Indigo
+        'rgb(6, 182, 212)',    // Cyan
+        'rgb(168, 162, 158)',  // Stone
+        'rgb(217, 119, 6)',    // Amber
+        'rgb(220, 38, 127)',   // Fuchsia
+        'rgb(101, 163, 13)',   // Green-400
+        'rgb(37, 99, 235)',    // Blue-600
+        'rgb(219, 39, 119)',   // Pink-600
       ];
       const color = colors[Math.floor(Math.random() * colors.length)];
 
@@ -88,9 +105,10 @@ export default function AnimatedBackground() {
 
     const createExplosion = (x: number, y: number, color: string) => {
       const explosionParticles = [];
-      for (let i = 0; i < 12; i++) {
-        const angle = (i / 12) * Math.PI * 2;
-        const speed = 2 + Math.random() * 3;
+      // Increased particle count from 12 to 20 for more spectacular explosions
+      for (let i = 0; i < 20; i++) {
+        const angle = (i / 20) * Math.PI * 2;
+        const speed = 2 + Math.random() * 4; // Increased speed range
         explosionParticles.push({
           id: particleId++,
           x,
@@ -98,10 +116,25 @@ export default function AnimatedBackground() {
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed - 1, // Slight upward bias
           color,
-          life: 60, // 60 frames
-          maxLife: 60
+          life: 80 + Math.random() * 40, // Variable lifetime 80-120 frames
+          maxLife: 80 + Math.random() * 40
         });
       }
+      
+      // Add some extra center particles for density
+      for (let i = 0; i < 8; i++) {
+        explosionParticles.push({
+          id: particleId++,
+          x: x + (Math.random() - 0.5) * 10, // Slight random offset
+          y: y + (Math.random() - 0.5) * 10,
+          vx: (Math.random() - 0.5) * 2,
+          vy: (Math.random() - 0.5) * 2 - 1,
+          color,
+          life: 60 + Math.random() * 30,
+          maxLife: 60 + Math.random() * 30
+        });
+      }
+      
       return explosionParticles;
     };
 
@@ -145,9 +178,9 @@ export default function AnimatedBackground() {
           .filter(particle => particle.life > 0);
       });
 
-      // Add new beam occasionally
+      // Add new beam occasionally - increased frequency and max beams
       setBeams(prevBeams => {
-        if (Math.random() < 0.02 && prevBeams.length < 3) { // Max 3 beams
+        if (Math.random() < 0.035 && prevBeams.length < 5 ) { // Increased from 0.02 to 0.035, max from 3 to 5
           return [...prevBeams, createBeam()];
         }
         return prevBeams;
@@ -208,10 +241,11 @@ export default function AnimatedBackground() {
           />
         ))}
         
-        {/* Render explosion particles */}
+        {/* Render explosion particles with enhanced visuals */}
         {particles.map(particle => {
           const opacity = particle.life / particle.maxLife;
-          const size = 3 + (1 - opacity) * 2; // Particles get bigger as they fade
+          const size = 2 + (1 - opacity) * 4; // Particles get bigger as they fade (increased size)
+          const glowIntensity = opacity * 0.9; // More intense glow
           
           return (
             <div
@@ -223,41 +257,67 @@ export default function AnimatedBackground() {
                 width: `${size}px`,
                 height: `${size}px`,
                 backgroundColor: particle.color,
-                opacity: opacity * 0.8,
-                boxShadow: `0 0 4px ${particle.color}80`,
+                opacity: opacity * 0.9, // Increased opacity
+                boxShadow: `0 0 ${size * 2}px ${particle.color}${Math.floor(glowIntensity * 255).toString(16).padStart(2, '0')}, 0 0 ${size * 4}px ${particle.color}40`,
+                filter: `blur(${(1 - opacity) * 0.5}px)`, // Subtle blur as they fade
               }}
             />
           );
         })}
       </div>
 
-      {/* Simple cursor follow */}
+      {/* Enhanced cursor follow with circle-in-circle design */}
       <div className="fixed inset-0 pointer-events-none z-50">
-        {/* Clean cursor dot */}
+        {/* Inner filled circle */}
         <motion.div
-          className="absolute w-2 h-2 bg-foreground/80 rounded-full"
+          className="absolute bg-foreground rounded-full"
           style={{
             left: cursorX,
             top: cursorY,
             transform: "translate(-50%, -50%)",
+            width: "6px",
+            height: "6px",
+            opacity: 0.7,
           }}
         />
         
-        {/* Simple following ring */}
+        {/* Outer dotted circle */}
         <motion.div
-          className="absolute w-8 h-8 border border-foreground/40 rounded-full"
+          className="absolute rounded-full"
           style={{
             left: cursorXSpring,
             top: cursorYSpring,
             transform: "translate(-50%, -50%)",
+            border: "2px dotted",
+            borderColor: "hsl(var(--foreground))",
+            width: "32px",
+            height: "32px",
+            opacity: 0.4,
           }}
           animate={{
-            scale: [1, 1.15, 1],
+            rotate: 360,
           }}
           transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
+            rotate: { duration: 8, repeat: Infinity, ease: "linear" }
+          }}
+        />
+
+        {/* Additional subtle ring that breathes */}
+        <motion.div
+          className="absolute rounded-full border border-foreground/20"
+          style={{
+            left: cursorXSpring,
+            top: cursorYSpring,
+            transform: "translate(-50%, -50%)",
+            width: "24px",
+            height: "24px",
+            opacity: 0.15,
+          }}
+          animate={{
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            scale: { duration: 3, repeat: Infinity, ease: "easeInOut" }
           }}
         />
       </div>
