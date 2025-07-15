@@ -146,7 +146,33 @@ export default function SearchInterface() {
     }, 1200);
   };
 
-  const currentResult = searchResults[currentQuery as keyof typeof searchResults];
+  // Case-insensitive search - find matching result by normalizing query
+  const findMatchingResult = (query: string) => {
+    const normalizedQuery = query.trim().toLowerCase();
+    
+    // First try exact match (case-insensitive)
+    const exactMatch = Object.keys(searchResults).find(
+      key => key.toLowerCase() === normalizedQuery
+    );
+    
+    if (exactMatch) {
+      return searchResults[exactMatch as keyof typeof searchResults];
+    }
+    
+    // Then try partial match for flexible searching
+    const partialMatch = Object.keys(searchResults).find(
+      key => key.toLowerCase().includes(normalizedQuery) || 
+            normalizedQuery.includes(key.toLowerCase())
+    );
+    
+    if (partialMatch) {
+      return searchResults[partialMatch as keyof typeof searchResults];
+    }
+    
+    return null;
+  };
+
+  const currentResult = findMatchingResult(currentQuery);
 
   if (isLoading) {
     return <LoadingAnimation />;
@@ -352,94 +378,409 @@ export default function SearchInterface() {
 
       {/* Search Results */}
       <AnimatePresence>
-        {showResults && currentResult && (
+        {showResults && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="max-w-4xl mx-auto mt-8 px-6"
+            exit={{ opacity: 0, y: -30 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="max-w-5xl mx-auto mt-8 px-6"
           >
-            <Card className="overflow-hidden shadow-xl bg-card backdrop-blur-sm border">
-              <CardContent className="p-0">
-                <div className="p-8">
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className="p-3 rounded-lg bg-primary text-primary-foreground">
-                      {currentResult.icon}
-                    </div>
-                    <div className="flex-1">
-                      <h2 className="text-2xl font-bold text-foreground mb-2">
-                        {currentResult.title}
-                      </h2>
-                      <p className="text-muted-foreground text-lg">
-                        {currentResult.description}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="grid gap-4 md:grid-cols-2">
-                    {currentResult.details.map((detail, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        className="flex items-start gap-3 p-4 bg-muted rounded-lg border"
-                      >
-                        <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-                        <span className="text-foreground">
-                          {detail}
-                        </span>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* More Search Suggestions */}
-            <motion.div 
-              className="mt-8 text-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
+            <motion.div
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="group"
             >
-              <p className="text-muted-foreground mb-4">Try another search:</p>
-              <div className="flex flex-wrap gap-2 justify-center">
-                {searchQueries.filter(q => q !== currentQuery).slice(0, 3).map((query) => (
-                  <Button
-                    key={query}
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => handleSearch(query)}
-                    className="text-primary hover:bg-accent"
-                  >
-                    {query}
-                  </Button>
-                ))}
-              </div>
+            {currentResult ? (
+              <Card className="overflow-hidden shadow-2xl bg-gradient-to-br from-card via-card to-card/50 backdrop-blur-md border border-border/50 hover:border-primary/30 transition-all duration-500 hover:shadow-3xl relative">
+                {/* Animated border gradient */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg" />
+                
+                {/* Floating particles effect */}
+                <div className="absolute inset-0 overflow-hidden rounded-lg">
+                  {[...Array(6)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-1 h-1 bg-primary/30 rounded-full"
+                      initial={{ 
+                        x: Math.random() * 100 + "%", 
+                        y: "100%",
+                        opacity: 0 
+                      }}
+                      animate={{ 
+                        y: "-10%",
+                        opacity: [0, 1, 0],
+                      }}
+                      transition={{
+                        duration: 3 + Math.random() * 2,
+                        repeat: Infinity,
+                        delay: i * 0.5,
+                        ease: "easeOut"
+                      }}
+                    />
+                  ))}
+                </div>
+
+                <CardContent className="p-0 relative z-10">
+                  <div className="p-8 lg:p-10">
+                    {/* Header with enhanced animation */}
+                    <motion.div 
+                      className="flex items-start gap-6 mb-8"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3, duration: 0.5 }}
+                    >
+                      <motion.div 
+                        className="relative group/icon"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                      >
+                        <div className="absolute inset-0 bg-primary/20 rounded-xl blur-xl group-hover/icon:blur-2xl transition-all duration-300" />
+                        <div className="relative p-4 rounded-xl bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-lg">
+                          {currentResult.icon}
+                        </div>
+                      </motion.div>
+                      <div className="flex-1">
+                        <motion.h2 
+                          className="text-3xl lg:text-4xl font-bold text-foreground mb-3 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text"
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.4, duration: 0.5 }}
+                        >
+                          {currentResult.title}
+                        </motion.h2>
+                        <motion.p 
+                          className="text-muted-foreground text-lg lg:text-xl leading-relaxed"
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.5, duration: 0.5 }}
+                        >
+                          {currentResult.description}
+                        </motion.p>
+                      </div>
+                    </motion.div>
+                    
+                    {/* Enhanced details grid */}
+                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                      {currentResult.details.map((detail, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          transition={{ 
+                            delay: 0.6 + index * 0.1, 
+                            duration: 0.5,
+                            type: "spring",
+                            stiffness: 200
+                          }}
+                          whileHover={{ 
+                            scale: 1.02, 
+                            y: -2,
+                            transition: { duration: 0.2 }
+                          }}
+                          className="group/detail relative cursor-pointer"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl opacity-0 group-hover/detail:opacity-100 transition-all duration-300" />
+                          <div className="relative flex items-start gap-4 p-5 bg-gradient-to-br from-muted/80 to-muted rounded-xl border border-border/50 hover:border-primary/30 transition-all duration-300 backdrop-blur-sm">
+                            <motion.div 
+                              className="w-3 h-3 bg-gradient-to-r from-primary to-primary/70 rounded-full mt-2 flex-shrink-0 shadow-lg"
+                              whileHover={{ scale: 1.2 }}
+                              transition={{ type: "spring", stiffness: 400 }}
+                            />
+                            <motion.span 
+                              className="text-foreground leading-relaxed group-hover/detail:text-foreground/90 transition-colors duration-300"
+                              initial={{ opacity: 0.8 }}
+                              whileHover={{ opacity: 1 }}
+                            >
+                              {detail}
+                            </motion.span>
+                          </div>
+                          
+                          {/* Hover glow effect */}
+                          <div className="absolute inset-0 bg-primary/5 rounded-xl opacity-0 group-hover/detail:opacity-100 transition-opacity duration-300 -z-10 blur-sm" />
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    {/* Interactive action buttons */}
+                    <motion.div 
+                      className="mt-8 pt-6 border-t border-border/30"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 1, duration: 0.5 }}
+                    >
+                      <div className="flex flex-wrap gap-3 justify-center">
+                        <motion.button
+                          whileHover={{ scale: 1.05, y: -1 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="px-6 py-2 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 rounded-full text-sm font-medium transition-all duration-300 hover:shadow-lg hover:shadow-primary/20"
+                        >
+                          Learn More
+                        </motion.button>
+                        <motion.button
+                          whileHover={{ scale: 1.05, y: -1 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="px-6 py-2 bg-muted hover:bg-muted/80 text-foreground border border-border rounded-full text-sm font-medium transition-all duration-300 hover:shadow-lg"
+                        >
+                          View Details
+                        </motion.button>
+                        <motion.button
+                          whileHover={{ scale: 1.05, y: -1 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="px-6 py-2 bg-transparent hover:bg-accent text-muted-foreground hover:text-foreground border border-border/50 rounded-full text-sm font-medium transition-all duration-300"
+                        >
+                          Share
+                        </motion.button>
+                      </div>
+                    </motion.div>
+                  </div>
+                </CardContent>
+              </Card>
+            ) : (
+              /* No Results Found - Fallback for unknown queries */
+              <Card className="overflow-hidden shadow-2xl bg-gradient-to-br from-card via-card to-card/50 backdrop-blur-md border border-border/50 relative">
+                {/* Animated border gradient */}
+                <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 via-transparent to-orange-500/20 opacity-30 rounded-lg" />
+                
+                <CardContent className="p-0 relative z-10">
+                  <div className="p-8 lg:p-10 text-center">
+                    {/* Not Found Header */}
+                    <motion.div 
+                      className="mb-8"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3, duration: 0.5 }}
+                    >
+                      <motion.div 
+                        className="relative mx-auto mb-6 w-20 h-20"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                      >
+                        <div className="absolute inset-0 bg-orange-500/20 rounded-xl blur-xl" />
+                        <div className="relative w-full h-full rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-lg flex items-center justify-center">
+                          <Search className="w-10 h-10" />
+                        </div>
+                      </motion.div>
+                      
+                      <motion.h2 
+                        className="text-3xl lg:text-4xl font-bold text-foreground mb-3"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4, duration: 0.5 }}
+                      >
+                        Hmm, I don't have that info yet
+                      </motion.h2>
+                      <motion.p 
+                        className="text-muted-foreground text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5, duration: 0.5 }}
+                      >
+                        I couldn't find information about "<span className="font-semibold text-foreground">{currentQuery}</span>". But don't worry - there's plenty more to discover about Rohit!
+                      </motion.p>
+                    </motion.div>
+                    
+                    {/* Helpful suggestions */}
+                    <motion.div 
+                      className="mb-8"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6, duration: 0.5 }}
+                    >
+                      <h3 className="text-xl font-semibold text-foreground mb-4">Try searching for:</h3>
+                      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl mx-auto">
+                        {searchQueries.slice(0, 6).map((query, index) => (
+                          <motion.div
+                            key={query}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ 
+                              delay: 0.7 + index * 0.1, 
+                              duration: 0.4,
+                              type: "spring",
+                              stiffness: 200
+                            }}
+                            whileHover={{ scale: 1.02, y: -2 }}
+                            whileTap={{ scale: 0.98 }}
+                          >
+                            <button
+                              onClick={() => handleSearch(query)}
+                              className="w-full p-4 bg-gradient-to-br from-muted/80 to-muted rounded-xl border border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-lg group relative overflow-hidden"
+                            >
+                              <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                              <div className="relative z-10 flex items-center gap-3">
+                                <div className="w-2 h-2 bg-gradient-to-r from-primary to-primary/70 rounded-full flex-shrink-0" />
+                                <span className="text-sm text-foreground font-medium">
+                                  {query}
+                                </span>
+                              </div>
+                            </button>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+
+                    {/* Action buttons for no results */}
+                    <motion.div 
+                      className="pt-6 border-t border-border/30"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 1.2, duration: 0.5 }}
+                    >
+                      <div className="flex flex-wrap gap-3 justify-center">
+                        <motion.button
+                          onClick={() => handleSearch("Who is Rohit?")}
+                          whileHover={{ scale: 1.05, y: -1 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="px-6 py-2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full text-sm font-medium transition-all duration-300 hover:shadow-lg hover:shadow-primary/20"
+                        >
+                          Start with basics
+                        </motion.button>
+                        <motion.button
+                          onClick={() => handleSearch("Best projects by Rohit")}
+                          whileHover={{ scale: 1.05, y: -1 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="px-6 py-2 bg-muted hover:bg-muted/80 text-foreground border border-border rounded-full text-sm font-medium transition-all duration-300 hover:shadow-lg"
+                        >
+                          View projects
+                        </motion.button>
+                        <motion.button
+                          onClick={() => {
+                            setCurrentQuery("");
+                            setShowResults(false);
+                            setHasSearched(false);
+                          }}
+                          whileHover={{ scale: 1.05, y: -1 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="px-6 py-2 bg-transparent hover:bg-accent text-muted-foreground hover:text-foreground border border-border/50 rounded-full text-sm font-medium transition-all duration-300"
+                        >
+                          Start over
+                        </motion.button>
+                      </div>
+                    </motion.div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
             </motion.div>
+
+            {/* Enhanced Search Suggestions with interactions - Only show for valid results */}
+            {currentResult && (
+              <motion.div 
+                className="mt-12 text-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.5 }}
+              >
+                <motion.p 
+                  className="text-muted-foreground mb-6 text-lg"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1, duration: 0.5 }}
+                >
+                  Explore more about Rohit:
+                </motion.p>
+                <div className="flex flex-wrap gap-3 justify-center max-w-3xl mx-auto">
+                  {searchQueries.filter(q => q !== currentQuery).slice(0, 4).map((query, index) => (
+                    <motion.div
+                      key={query}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ 
+                        delay: 1.2 + index * 0.1, 
+                        duration: 0.4,
+                        type: "spring",
+                        stiffness: 200
+                      }}
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleSearch(query)}
+                        className="relative group px-6 py-3 text-primary hover:bg-primary/10 border border-primary/20 hover:border-primary/40 rounded-full transition-all duration-300 overflow-hidden"
+                      >
+                        {/* Animated background on hover */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
+                        <span className="relative z-10 font-medium">{query}</span>
+                      </Button>
+                    </motion.div>
+                  ))}
+                </div>
+                
+                {/* Add a "Show All" button */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.6, duration: 0.5 }}
+                  className="mt-6"
+                >
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 underline decoration-dotted underline-offset-4"
+                  >
+                    View all search options
+                  </motion.button>
+                </motion.div>
+              </motion.div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Search History */}
+      {/* Enhanced Search History with better interactions */}
       {searchHistory.length > 0 && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="max-w-2xl mx-auto px-6 mt-12 pb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+          className="max-w-3xl mx-auto px-6 mt-16 pb-16"
         >
-          <h3 className="text-sm font-medium text-muted-foreground mb-3">Recent searches</h3>
-          <div className="space-y-2">
+          <motion.h3 
+            className="text-lg font-semibold text-foreground mb-6 text-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            Recent Discoveries
+          </motion.h3>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {searchHistory.map((query, index) => (
-              <button
+              <motion.div
                 key={index}
-                onClick={() => handleSearch(query)}
-                className="block w-full text-left px-4 py-2 text-sm text-muted-foreground hover:bg-accent rounded-lg transition-colors"
+                initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ delay: 0.6 + index * 0.1, duration: 0.4 }}
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="group"
               >
-                <Search className="w-4 h-4 inline mr-2 text-muted-foreground" />
-                {query}
-              </button>
+                <button
+                  onClick={() => handleSearch(query)}
+                  className="w-full text-left p-4 bg-card hover:bg-card/80 border border-border hover:border-primary/30 rounded-xl transition-all duration-300 hover:shadow-lg group relative overflow-hidden"
+                >
+                  {/* Animated gradient background */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  <div className="relative z-10 flex items-center gap-3">
+                    <motion.div
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <Search className="w-4 h-4 text-primary group-hover:text-primary/80 transition-colors duration-300" />
+                    </motion.div>
+                    <span className="text-sm text-foreground group-hover:text-foreground/90 transition-colors duration-300 font-medium">
+                      {query}
+                    </span>
+                  </div>
+                  
+                  {/* Subtle shine effect */}
+                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                </button>
+              </motion.div>
             ))}
           </div>
         </motion.div>
