@@ -71,7 +71,7 @@ export default function EasterEggButton() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -79,7 +79,7 @@ export default function EasterEggButton() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             transition={{ type: "spring", duration: 0.5 }}
-            className="absolute bottom-20 right-0 w-96"
+            className="absolute bottom-16 sm:bottom-20 right-0 w-80 sm:w-96 max-w-[calc(100vw-2rem)]"
           >
             <Card className="overflow-hidden border border-border/50 shadow-2xl bg-card/95 backdrop-blur-md">
               <CardContent className="p-0">
@@ -90,9 +90,9 @@ export default function EasterEggButton() {
                 />
                 
                 {/* Header with close button */}
-                <div className="flex items-center justify-between p-4 pb-2">
+                <div className="flex items-center justify-between p-3 sm:p-4 pb-2">
                   <motion.h2 
-                    className="text-lg font-bold text-foreground"
+                    className="text-base sm:text-lg font-bold text-foreground"
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     key={`title-${currentEgg}`}
@@ -105,21 +105,21 @@ export default function EasterEggButton() {
                     whileTap={{ scale: 0.9 }}
                     className="p-1 rounded-full hover:bg-muted transition-colors"
                   >
-                    <X className="w-4 h-4 text-muted-foreground" />
+                    <X className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground" />
                   </motion.button>
                 </div>
 
                 {/* Content area */}
-                <div className={`mx-4 mb-4 p-4 rounded-xl transition-colors duration-300 ${easterEggs[currentEgg].bgColor}`}>
+                <div className={`mx-3 sm:mx-4 mb-3 sm:mb-4 p-3 sm:p-4 rounded-xl transition-colors duration-300 ${easterEggs[currentEgg].bgColor}`}>
                   <motion.div 
-                    className="flex items-start gap-4 mb-4"
+                    className="flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
                     key={`content-${currentEgg}`}
                   >
                     <motion.div 
-                      className={`p-3 rounded-xl bg-gradient-to-r ${easterEggs[currentEgg].gradient} text-white shadow-lg`}
+                      className={`p-2 sm:p-3 rounded-xl bg-gradient-to-r ${easterEggs[currentEgg].gradient} text-white shadow-lg`}
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       transition={{ type: "spring", stiffness: 400 }}
                     >
@@ -127,7 +127,7 @@ export default function EasterEggButton() {
                     </motion.div>
                     <div className="flex-1">
                       <motion.h3 
-                        className="font-bold text-foreground text-lg mb-2"
+                        className="font-bold text-foreground text-base sm:text-lg mb-1 sm:mb-2"
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.2 }}
@@ -135,7 +135,7 @@ export default function EasterEggButton() {
                         {easterEggs[currentEgg].title}
                       </motion.h3>
                       <motion.p 
-                        className="text-sm text-muted-foreground leading-relaxed"
+                        className="text-xs sm:text-sm text-muted-foreground leading-relaxed"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 }}
@@ -147,7 +147,7 @@ export default function EasterEggButton() {
                 </div>
 
                 {/* Navigation footer */}
-                <div className="flex items-center justify-between p-4 pt-0">
+                <div className="flex items-center justify-between p-3 sm:p-4 pt-0">
                   <div className="flex space-x-1">
                     {easterEggs.map((_, index) => (
                       <motion.button
@@ -161,7 +161,7 @@ export default function EasterEggButton() {
                         }}
                         whileHover={{ scale: 1.2 }}
                         whileTap={{ scale: 0.9 }}
-                        className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                        className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all duration-300 ${
                           index === currentEgg 
                             ? `bg-gradient-to-r ${easterEggs[currentEgg].gradient} shadow-sm` 
                             : 'bg-muted hover:bg-muted-foreground/30'
@@ -170,26 +170,26 @@ export default function EasterEggButton() {
                     ))}
                   </div>
                   
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1 sm:gap-2">
                     <motion.button
                       onClick={prevEasterEgg}
                       whileHover={{ scale: 1.05, x: -2 }}
                       whileTap={{ scale: 0.95 }}
                       disabled={isAnimating}
-                      className="px-3 py-1.5 text-xs font-medium bg-muted hover:bg-muted/80 text-foreground rounded-lg transition-colors disabled:opacity-50 flex items-center gap-1"
+                      className="px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium bg-muted hover:bg-muted/80 text-foreground rounded-lg transition-colors disabled:opacity-50 flex items-center gap-1"
                     >
-                      <ChevronRight className="w-3 h-3 rotate-180" />
-                      Prev
+                      <ChevronRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 rotate-180" />
+                      <span className="hidden sm:inline">Prev</span>
                     </motion.button>
                     <motion.button
                       onClick={nextEasterEgg}
                       whileHover={{ scale: 1.05, x: 2 }}
                       whileTap={{ scale: 0.95 }}
                       disabled={isAnimating}
-                      className={`px-3 py-1.5 text-xs font-medium bg-gradient-to-r ${easterEggs[currentEgg].gradient} text-white rounded-lg transition-all disabled:opacity-50 flex items-center gap-1 shadow-sm`}
+                      className={`px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium bg-gradient-to-r ${easterEggs[currentEgg].gradient} text-white rounded-lg transition-all disabled:opacity-50 flex items-center gap-1 shadow-sm`}
                     >
-                      Next
-                      <ChevronRight className="w-3 h-3" />
+                      <span className="hidden sm:inline">Next</span>
+                      <ChevronRight className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                     </motion.button>
                   </div>
                 </div>
@@ -219,7 +219,7 @@ export default function EasterEggButton() {
           whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsOpen(!isOpen)}
-          className={`relative w-16 h-16 rounded-full bg-gradient-to-r ${easterEggs[currentEgg].gradient} text-white shadow-xl flex items-center justify-center transition-all duration-300 border-2 border-white/20`}
+          className={`relative w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r ${easterEggs[currentEgg].gradient} text-white shadow-xl flex items-center justify-center transition-all duration-300 border-2 border-white/20`}
         >
           <motion.div
             animate={{ 
@@ -228,17 +228,17 @@ export default function EasterEggButton() {
             }}
             transition={{ duration: 0.3, type: "spring", stiffness: 200 }}
           >
-            <Sparkles className="w-7 h-7" />
+            <Sparkles className="w-5 h-5 sm:w-7 sm:h-7" />
           </motion.div>
           
           {/* Floating particles */}
           {!isOpen && [...Array(3)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-1 h-1 bg-white/60 rounded-full"
+              className="absolute w-0.5 h-0.5 sm:w-1 sm:h-1 bg-white/60 rounded-full"
               animate={{
-                y: [-20, -35],
-                x: [0, (i - 1) * 10],
+                y: [-15, -25],
+                x: [0, (i - 1) * 8],
                 opacity: [1, 0],
                 scale: [1, 0.5],
               }}
