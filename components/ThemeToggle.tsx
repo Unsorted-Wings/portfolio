@@ -38,7 +38,7 @@ export default function ContactBar() {
     {
       icon: <Linkedin className="w-3 h-3 sm:w-4 sm:h-4" />,
       label: "LinkedIn",
-      href: "https://linkedin.com/in/rohit-dev",
+      href: "https://www.linkedin.com/in/rohit-shukla-a8729124b/",
       color: "hover:bg-blue-500/10 hover:text-blue-600 hover:border-blue-500/30"
     },
     {
@@ -50,15 +50,15 @@ export default function ContactBar() {
     {
       icon: <Download className="w-3 h-3 sm:w-4 sm:h-4" />,
       label: "Resume",
-      href: "/resume.pdf",
+      href: "/Resume_Rohit_Shukla.pdf",
       color: "hover:bg-orange-500/10 hover:text-orange-600 hover:border-orange-500/30",
       isDownload: true
     }
   ];
 
   const contactOptions = [
-    { label: "Email", href: "mailto:rohit@example.com" },
-    { label: "Call", href: "tel:+1234567890" }
+    { label: "Email", href: "mailto:shuklarohit2105@gmail.com" },
+    { label: "Call", href: "tel:+919316331662" }
   ];
 
   if (!mounted) {
@@ -166,7 +166,7 @@ export default function ContactBar() {
                     href={contact.href}
                     target={contact.isDownload ? "_self" : "_blank"}
                     rel={contact.isDownload ? undefined : "noopener noreferrer"}
-                    download={contact.isDownload ? "Rohit-Resume.pdf" : undefined}
+                    download={contact.isDownload ? "Resume_Rohit_Shukla.pdf" : undefined}
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >

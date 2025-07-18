@@ -26,90 +26,90 @@ const searchQueries = [
 const searchResults = {
   "Who is Rohit?": {
     icon: <Brain className="w-6 h-6" />,
-    title: "Senior Software Engineer & Tech Innovator",
-    description: "A passionate technologist with 8+ years of experience building scalable systems and leading high-performing teams. Known for turning complex problems into elegant solutions.",
+    title: "Full-Stack Developer & Computer Science Student",
+    description: "Software developer skilled in building full-stack applications using Next.js, Node.js, and Firebase. Strong foundation in both frontend and backend technologies with hands-on startup experience. Passionate about team-building, event organization, and leading initiatives.",
     details: [
-      "Full-stack engineer with expertise in modern web technologies",
-      "Experience scaling applications to millions of users",
-      "Passionate about clean code, system design, and user experience",
-      "Mentor and technical leader who loves growing talent"
+      "B.Sc. Computer Science student at Gujarat University (CGPA: 8.3)",
+      "Core Team Member at DaftarOS startup with full-stack development experience",
+      "Freelance developer since 2022 serving startups and businesses",
+      "Event organizer and leader with experience managing state-level techfests"
     ]
   },
   "Rohit's experience at": {
     icon: <Code className="w-6 h-6" />,
-    title: "Professional Journey",
-    description: "Built my career at top-tier companies, solving complex technical challenges and leading transformative projects.",
+    title: "Professional Experience",
+    description: "Hands-on experience combining startup development, freelance projects, and operational responsibilities across diverse technical environments.",
     details: [
-      "Senior SWE at TechCorp - Led microservices architecture migration",
-      "Team Lead at InnovateLabs - Scaled platform from 10K to 1M+ users", 
-      "Full-Stack Developer at StartupXYZ - Built core product from ground up",
-      "Founded TechSolutions - Delivered consulting for 50+ clients"
+      "Core Team Member at DaftarOS (Dec 2024 – Jun 2025) - Built core features with Next.js, Node.js, Supabase",
+      "Freelance Developer (2022 – Present) - Delivered scalable websites using React, HTML/CSS", 
+      "Startup Operations - Managed team syncs, onboarding, and coordinated development workflows",
+      "Cross-platform Development - Built responsive UIs and deployed full-stack applications"
     ]
   },
   "Best projects by Rohit": {
     icon: <Sparkles className="w-6 h-6" />,
     title: "Featured Projects",
-    description: "A collection of projects that showcase innovation, technical excellence, and real-world impact.",
+    description: "Academic and professional projects showcasing full-stack development skills with modern technologies and scalable architecture.",
     details: [
-      "CloudSync Pro - Real-time collaboration platform (React, Node.js, WebRTC)",
-      "AI-Powered Analytics Dashboard - ML-driven insights (Python, TensorFlow, React)",
-      "Distributed Payment System - High-throughput financial platform (Go, Kafka, PostgreSQL)",
-      "Mobile-First E-commerce - Full-stack solution (React Native, GraphQL, MongoDB)"
+      "Department Campus Support (DCS) - All-in-one academic platform (Next.js, Tailwind, Shadcn, Firebase, Cloudinary)",
+      "Attendance Management System - College portal with full-stack features (Next.js, Shadcn, MongoDB)",
+      "Portfolio Website - Responsive design with advanced animations and modern UI/UX",
+      "Freelance Client Projects - Custom websites and applications for startups and businesses"
     ]
   },
   "Rohit's technical skills": {
     icon: <Zap className="w-6 h-6" />,
-    title: "Technical Expertise",
-    description: "Deep expertise across the full technology stack with a focus on modern, scalable solutions.",
+    title: "Technical Skills",
+    description: "Comprehensive skill set spanning multiple programming languages, modern frameworks, and development tools for full-stack development.",
     details: [
-      "Languages: TypeScript, Python, Go, Java, Rust",
-      "Frontend: React, Next.js, Vue.js, React Native, Tailwind CSS",
-      "Backend: Node.js, Express, FastAPI, GraphQL, REST APIs", 
-      "Infrastructure: AWS, Docker, Kubernetes, Terraform, CI/CD"
+      "Languages: C++, JavaScript, Java, HTML, CSS",
+      "Frontend: React.js, Next.js, Tailwind CSS, Shadcn UI components",
+      "Backend: Node.js, MongoDB, MySQL, Firebase, Supabase", 
+      "Tools: Git, Postman, VS Code, Cloudinary, Shopify"
     ]
   },
   "How to contact Rohit": {
     icon: <Search className="w-6 h-6" />,
     title: "Let's Connect",
-    description: "Always excited to discuss new opportunities, collaborate on interesting projects, or just chat about technology.",
+    description: "Based in Ahmedabad, Gujarat. Open to new opportunities, collaborations, and connecting with fellow developers and tech enthusiasts.",
     details: [
-      "📧 rohit@example.com",
-      "💼 linkedin.com/in/rohit-dev",
-      "🐙 github.com/rohit-dev",
-      "🌐 rohit-portfolio.dev"
+      "📧 Email: shuklarohit2105@gmail.com",
+      "📱 Phone: +91 9316331662",
+      "💼 LinkedIn: rohit-shukla-a8729124b",
+      "🌐 Portfolio: rohit-shukla-portfolio.vercel.app"
     ]
   },
   "Rohit's achievements": {
     icon: <Sparkles className="w-6 h-6" />,
-    title: "Key Achievements",
-    description: "Recognition and milestones that define my professional journey and impact on teams and products.",
+    title: "Key Achievements & Leadership",
+    description: "Academic excellence combined with leadership roles in organizing major events and representing the university at state-level platforms.",
     details: [
-      "🏆 Employee of the Year 2023 - Led critical infrastructure migration",
-      "📈 Increased team productivity by 40% through process optimization", 
-      "🎯 Delivered 15+ projects on time with 99.9% uptime",
-      "👥 Mentored 20+ junior developers, 8 got promoted"
+      "� Maintaining 8.3 CGPA in B.Sc. Computer Science at Gujarat University",
+      "🏆 Lead Organizer for Tech Kaushalya 2024 - State-level techfest with team management", 
+      "🎯 Student Delegate at Vibrant Gujarat 2024 representing Gujarat University",
+      "👥 Multiple terms as Class Representative and college event organizer"
     ]
   },
   "Work culture at Rohit's teams": {
     icon: <Brain className="w-6 h-6" />,
-    title: "Team Culture & Philosophy",
-    description: "Creating environments where innovation thrives and every team member feels empowered to do their best work.",
+    title: "Leadership & Collaboration Style",
+    description: "Experienced in leading large-scale events, managing diverse teams, and fostering collaborative environments in both academic and professional settings.",
     details: [
-      "🤝 Collaborative decision-making with psychological safety",
-      "📚 Learning culture with weekly tech talks and knowledge sharing",
-      "⚡ Agile mindset with focus on continuous improvement",
-      "🎉 Work-life balance with flexible schedules and remote options"
+      "🎪 Event Leadership - Successfully organized Tech Kaushalya 2024 and Jubin Nautiyal Concert",
+      "� Team Management - Coordinated planning, logistics, and team syncs at DaftarOS startup",
+      "🤝 Collaboration - Served as liaison between faculty and students as Class Representative",
+      "📋 Operations Focus - Balanced coding responsibilities with planning and coordination tasks"
     ]
   },
   "Rohit's future goals": {
     icon: <Zap className="w-6 h-6" />,
-    title: "Vision & Future Goals",
-    description: "Constantly evolving and pushing boundaries to create meaningful impact in technology and beyond.",
+    title: "Future Aspirations & Goals",
+    description: "Focused on completing education with excellence while expanding professional experience in full-stack development and startup environments.",
     details: [
-      "🚀 Lead engineering teams at unicorn startups or FAANG companies",
-      "🌍 Build products that positively impact millions of users globally",
-      "📖 Contribute to open source and write technical blog posts",
-      "🎓 Eventually transition into tech leadership and strategic roles"
+      "🎓 Complete B.Sc. Computer Science degree with high academic standing (graduating July 2025)",
+      "🚀 Expand expertise in modern web technologies and cloud platforms",
+      "� Secure full-time role in product-based companies or innovative startups",
+      "� Continue combining technical development with leadership and event management skills"
     ]
   }
 };
@@ -731,21 +731,6 @@ export default function SearchInterface() {
                   ))}
                 </div>
                 
-                {/* Add a "Show All" button */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1.6, duration: 0.5 }}
-                  className="mt-4 sm:mt-6"
-                >
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors duration-300 underline decoration-dotted underline-offset-4"
-                  >
-                    View all search options
-                  </motion.button>
-                </motion.div>
               </motion.div>
             )}
           </motion.div>
