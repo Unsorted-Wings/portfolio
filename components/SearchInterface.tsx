@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Sparkles, Code, Brain, Zap } from "lucide-react";
+import { Search, Sparkles, Code, Brain, Zap, Mail, Phone, Linkedin, Github, Globe, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import AnimatedBackground from "@/components/AnimatedBackground";
@@ -16,10 +16,8 @@ const searchQueries = [
   "Best projects by Rohit",
   "Rohit's technical skills",
   "How to contact Rohit",
-  "Rohit's leadership style",
-  "Innovative solutions by Rohit",
   "Rohit's achievements",
-  "Work culture at Rohit's teams",
+  "Rohit's working culture",
   "Rohit's future goals"
 ];
 
@@ -51,10 +49,10 @@ const searchResults = {
     title: "Featured Projects",
     description: "Academic and professional projects showcasing full-stack development skills with modern technologies and scalable architecture.",
     details: [
-      "Department Campus Support (DCS) - All-in-one academic platform (Next.js, Tailwind, Shadcn, Firebase, Cloudinary)",
-      "Attendance Management System - College portal with full-stack features (Next.js, Shadcn, MongoDB)",
-      "Portfolio Website - Responsive design with advanced animations and modern UI/UX",
-      "Freelance Client Projects - Custom websites and applications for startups and businesses"
+      "Department Campus Support (DCS) - All-in-one academic platform for schedule tracking, assignments, and announcements | Tech: Next.js, Tailwind, Shadcn, Firebase, Cloudinary | [GitHub](https://github.com/Unsorted-Wings/Digital-Campus-Support) | [Live Demo](https://digital-campus-support.vercel.app/)",
+      "Attendance Management System - College attendance portal with modern UI and full-stack features | Tech: Next.js, Shadcn, MongoDB | [Live Demo](https://attendence-system-1910.vercel.app/users/login)",
+      "Portfolio Website - This interactive Google-inspired portfolio with advanced animations and responsive design | Tech: Next.js, TypeScript, Framer Motion, Tailwind CSS | [GitHub](https://github.com/Unsorted-Wings/portfolio) | [Live Demo](https://rohit-shukla-portfolio.vercel.app)",
+      "Freelance Client Projects - Multiple custom websites and applications delivered for startups and businesses | Tech: React, Shopify, HTML/CSS | [Contact for Details](mailto:shuklarohit2105@gmail.com)"
     ]
   },
   "Rohit's technical skills": {
@@ -62,10 +60,10 @@ const searchResults = {
     title: "Technical Skills",
     description: "Comprehensive skill set spanning multiple programming languages, modern frameworks, and development tools for full-stack development.",
     details: [
-      "Languages: C++, JavaScript, Java, HTML, CSS",
-      "Frontend: React.js, Next.js, Tailwind CSS, Shadcn UI components",
-      "Backend: Node.js, MongoDB, MySQL, Firebase, Supabase", 
-      "Tools: Git, Postman, VS Code, Cloudinary, Shopify"
+      "Languages: [C++](https://cplusplus.com/), [JavaScript](https://javascript.info/), [Java](https://docs.oracle.com/en/java/), HTML5, CSS3",
+      "Frontend: [React.js](https://reactjs.org/), [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/), [Shadcn UI](https://ui.shadcn.com/) components",
+      "Backend: [Node.js](https://nodejs.org/), [MongoDB](https://mongodb.com/), [MySQL](https://mysql.com/), [Firebase](https://firebase.google.com/), [Supabase](https://supabase.io/)", 
+      "Tools: [Git](https://git-scm.com/), [Postman](https://postman.com/), [VS Code](https://code.visualstudio.com/), [Cloudinary](https://cloudinary.com/), [Shopify](https://shopify.com/)"
     ]
   },
   "How to contact Rohit": {
@@ -73,10 +71,12 @@ const searchResults = {
     title: "Let's Connect",
     description: "Based in Ahmedabad, Gujarat. Open to new opportunities, collaborations, and connecting with fellow developers and tech enthusiasts.",
     details: [
-      "📧 Email: shuklarohit2105@gmail.com",
-      "📱 Phone: +91 9316331662",
-      "💼 LinkedIn: rohit-shukla-a8729124b",
-      "🌐 Portfolio: rohit-shukla-portfolio.vercel.app"
+      "📧 Email: [shuklarohit2105@gmail.com](mailto:shuklarohit2105@gmail.com) - For professional inquiries and collaboration",
+      "📱 Phone: [+91 9316331662](tel:+919316331662) - Available for direct calls and WhatsApp",
+      "💼 LinkedIn: [rohit-shukla-a8729124b](https://www.linkedin.com/in/rohit-shukla-a8729124b/) - Connect for networking and opportunities",
+      "🌐 Portfolio: [rohit-shukla-portfolio.vercel.app](https://rohit-shukla-portfolio.vercel.app) - This interactive portfolio website",
+      "📂 GitHub: [github.com/rohit-shukla](https://github.com/rohit-shukla) - Check out my code repositories and contributions",
+      "📍 Location: Ahmedabad, Gujarat, India - Open to remote work and local opportunities"
     ]
   },
   "Rohit's achievements": {
@@ -90,26 +90,25 @@ const searchResults = {
       "👥 Multiple terms as Class Representative and college event organizer"
     ]
   },
-  "Work culture at Rohit's teams": {
+  "Rohit's Work culture": {
     icon: <Brain className="w-6 h-6" />,
     title: "Leadership & Collaboration Style",
     description: "Experienced in leading large-scale events, managing diverse teams, and fostering collaborative environments in both academic and professional settings.",
     details: [
       "🎪 Event Leadership - Successfully organized Tech Kaushalya 2024 and Jubin Nautiyal Concert",
-      "� Team Management - Coordinated planning, logistics, and team syncs at DaftarOS startup",
-      "🤝 Collaboration - Served as liaison between faculty and students as Class Representative",
+      "👥 Team Management - Coordinated planning, logistics, and team syncs to ensure smooth execution",
+      "🤝 Collaboration - Talking to stakeholders and team members to foster a collaborative environment",
       "📋 Operations Focus - Balanced coding responsibilities with planning and coordination tasks"
     ]
   },
   "Rohit's future goals": {
     icon: <Zap className="w-6 h-6" />,
     title: "Future Aspirations & Goals",
-    description: "Focused on completing education with excellence while expanding professional experience in full-stack development and startup environments.",
+    description: "Focused on continuous learning and growth in the tech industry. And in the end developing something impactful from India.",
     details: [
       "🎓 Complete B.Sc. Computer Science degree with high academic standing (graduating July 2025)",
       "🚀 Expand expertise in modern web technologies and cloud platforms",
-      "� Secure full-time role in product-based companies or innovative startups",
-      "� Continue combining technical development with leadership and event management skills"
+      "🤝 Continue combining technical development with leadership and event management skills"
     ]
   }
 };
@@ -121,6 +120,187 @@ export default function SearchInterface() {
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasSearched, setHasSearched] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [showCompactSuggestions, setShowCompactSuggestions] = useState(false);
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
+  const [isKeyboardNavigating, setIsKeyboardNavigating] = useState(false);
+
+  // Helper function to parse and render links in text
+  const parseTextWithLinks = (text: string) => {
+    // Regex to match [text](url) markdown-style links
+    const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+    const parts = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = linkRegex.exec(text)) !== null) {
+      // Add text before the link
+      if (match.index > lastIndex) {
+        parts.push(text.slice(lastIndex, match.index));
+      }
+      
+      // Check if this is a contact link that should be rendered as a button
+      const linkText = match[1];
+      const linkUrl = match[2];
+      const isContactLink = linkUrl.startsWith('mailto:') || linkUrl.startsWith('tel:') || 
+                           linkUrl.includes('linkedin.com') || linkUrl.includes('github.com') ||
+                           linkText.toLowerCase().includes('portfolio') || linkText.toLowerCase().includes('contact');
+      
+      if (isContactLink) {
+        // Determine the appropriate icon based on the link type
+        let icon = null;
+        if (linkUrl.startsWith('mailto:')) {
+          icon = <Mail className="w-4 h-4 mr-2" />;
+        } else if (linkUrl.startsWith('tel:')) {
+          icon = <Phone className="w-4 h-4 mr-2" />;
+        } else if (linkUrl.includes('linkedin.com')) {
+          icon = <Linkedin className="w-4 h-4 mr-2" />;
+        } else if (linkUrl.includes('github.com')) {
+          icon = <Github className="w-4 h-4 mr-2" />;
+        } else if (linkText.toLowerCase().includes('portfolio') || linkUrl.includes('vercel.app')) {
+          icon = <Globe className="w-4 h-4 mr-2" />;
+        } else if (linkText.toLowerCase().includes('location')) {
+          icon = <MapPin className="w-4 h-4 mr-2" />;
+        }
+
+        // Render contact links as prominent buttons
+        parts.push(
+          <Button
+            key={match.index}
+            variant="outline"
+            size="sm"
+            className="mx-1 my-1 h-auto py-2 px-3 bg-primary/10 hover:bg-primary/20 border-primary/30 hover:border-primary/50 text-primary hover:text-primary/90 transition-all duration-300 shadow-sm hover:shadow-md inline-flex items-center"
+            onClick={(e) => {
+              e.stopPropagation();
+              if (linkUrl.startsWith('mailto:') || linkUrl.startsWith('tel:')) {
+                window.location.href = linkUrl;
+              } else {
+                window.open(linkUrl, '_blank', 'noopener,noreferrer');
+              }
+            }}
+          >
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="font-medium flex items-center"
+            >
+              {icon}
+              {linkText}
+            </motion.span>
+          </Button>
+        );
+      } else {
+        // Render regular links as enhanced text links
+        parts.push(
+          <motion.a
+            key={match.index}
+            href={linkUrl}
+            target={linkUrl.startsWith('mailto:') || linkUrl.startsWith('tel:') ? '_self' : '_blank'}
+            rel={linkUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
+            className="text-primary hover:text-primary/80 underline decoration-primary/30 hover:decoration-primary/60 transition-all duration-200 font-medium inline-block"
+            whileHover={{ scale: 1.02 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {linkText}
+          </motion.a>
+        );
+      }
+      
+      lastIndex = match.index + match[0].length;
+    }
+    
+    // Add remaining text
+    if (lastIndex < text.length) {
+      parts.push(text.slice(lastIndex));
+    }
+    
+    return parts.length > 1 ? parts : text;
+  };
+
+  // Get filtered suggestions based on current query
+  const getFilteredSuggestions = () => {
+    if (!currentQuery.trim()) {
+      return searchQueries.slice(0, 6);
+    }
+    
+    const query = currentQuery.toLowerCase();
+    const filtered = searchQueries.filter(suggestion => 
+      suggestion.toLowerCase().includes(query) && 
+      suggestion.toLowerCase() !== query
+    );
+    
+    // Add search history that matches
+    const historyMatches = searchHistory.filter(historyItem => 
+      historyItem.toLowerCase().includes(query) && 
+      historyItem.toLowerCase() !== query &&
+      !filtered.includes(historyItem)
+    );
+    
+    return [...filtered, ...historyMatches].slice(0, 6);
+  };
+
+  // Handle keyboard navigation for suggestions
+  const handleKeyDown = (e: React.KeyboardEvent, isCompact: boolean = false) => {
+    const suggestions = getFilteredSuggestions();
+    const showSuggestionsState = isCompact ? showCompactSuggestions : showSuggestions;
+    const setShowSuggestionsState = isCompact ? setShowCompactSuggestions : setShowSuggestions;
+    
+    if (!showSuggestionsState) return;
+    
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setIsKeyboardNavigating(true);
+      setSelectedSuggestionIndex(prev => 
+        prev < suggestions.length - 1 ? prev + 1 : prev
+      );
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setIsKeyboardNavigating(true);
+      setSelectedSuggestionIndex(prev => prev > 0 ? prev - 1 : -1);
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (selectedSuggestionIndex >= 0 && selectedSuggestionIndex < suggestions.length) {
+        handleSearch(suggestions[selectedSuggestionIndex]);
+        setShowSuggestionsState(false);
+        setSelectedSuggestionIndex(-1);
+      } else if (currentQuery.trim()) {
+        handleSearch(currentQuery);
+        setShowSuggestionsState(false);
+        setSelectedSuggestionIndex(-1);
+      }
+    } else if (e.key === 'Escape') {
+      setShowSuggestionsState(false);
+      setSelectedSuggestionIndex(-1);
+    }
+  };
+
+  // Handle input change with suggestions
+  const handleInputChange = (value: string, isCompact: boolean = false) => {
+    setCurrentQuery(value);
+    setSelectedSuggestionIndex(-1);
+    
+    if (value.trim()) {
+      if (isCompact) {
+        setShowCompactSuggestions(true);
+        setShowSuggestions(false);
+      } else {
+        setShowSuggestions(true);
+        setShowCompactSuggestions(false);
+      }
+    } else {
+      setShowSuggestions(false);
+      setShowCompactSuggestions(false);
+    }
+  };
+
+  // Handle suggestion click
+  const handleSuggestionClick = useCallback((suggestion: string) => {
+    handleSearch(suggestion);
+    setShowSuggestions(false);
+    setShowCompactSuggestions(false);
+    setSelectedSuggestionIndex(-1);
+    setIsKeyboardNavigating(false);
+  }, []);
 
   useEffect(() => {
     // Show loading animation for 2 seconds
@@ -131,11 +311,40 @@ export default function SearchInterface() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Close suggestions when clicking outside
+  useEffect(() => {
+    const handleClickOutside = () => {
+      setShowSuggestions(false);
+      setShowCompactSuggestions(false);
+      setSelectedSuggestionIndex(-1);
+      setIsKeyboardNavigating(false);
+    };
+
+    // Reset keyboard navigation when mouse moves
+    const handleMouseMove = () => {
+      if (isKeyboardNavigating) {
+        setIsKeyboardNavigating(false);
+        setSelectedSuggestionIndex(-1);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [isKeyboardNavigating]);
+
   const handleSearch = (query: string) => {
     setCurrentQuery(query);
     setIsSearching(true);
     setShowResults(false);
     setHasSearched(true);
+    setShowSuggestions(false);
+    setShowCompactSuggestions(false);
+    setSelectedSuggestionIndex(-1);
+    setIsKeyboardNavigating(false);
     
     // Add to search history
     setSearchHistory(prev => [query, ...prev.filter(q => q !== query)].slice(0, 5));
@@ -144,6 +353,18 @@ export default function SearchInterface() {
       setIsSearching(false);
       setShowResults(true);
     }, 1200);
+  };
+
+  // Reset to initial Google-like page
+  const handleLogoClick = () => {
+    setCurrentQuery("");
+    setShowResults(false);
+    setHasSearched(false);
+    setShowSuggestions(false);
+    setShowCompactSuggestions(false);
+    setSelectedSuggestionIndex(-1);
+    setIsKeyboardNavigating(false);
+    setIsSearching(false);
   };
 
   // Case-insensitive search - find matching result by normalizing query
@@ -205,6 +426,71 @@ export default function SearchInterface() {
 
   const gradientColors = getGradientColors(currentQuery);
 
+  // Suggestions dropdown component
+  const SuggestionsDropdown = ({ isCompact = false }: { isCompact?: boolean }) => {
+    const suggestions = getFilteredSuggestions();
+    const showSuggestionsState = isCompact ? showCompactSuggestions : showSuggestions;
+      
+      if (!showSuggestionsState || suggestions.length === 0) return null;
+
+      return (
+        <AnimatePresence mode="wait">
+          <motion.div
+            key="suggestions-dropdown"
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className={`absolute top-full left-0 right-0 z-[99999] mt-2 ${isCompact ? 'max-w-2xl' : 'max-w-2xl mx-auto'}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="bg-white dark:bg-gray-900 border border-border rounded-2xl shadow-2xl drop-shadow-2xl overflow-hidden">
+              <div className="py-2">
+                {suggestions.map((suggestion, index) => {
+                  const isKeyboardSelected = isKeyboardNavigating && selectedSuggestionIndex === index;
+                  return (
+                    <button
+                      key={suggestion}
+                      onClick={() => handleSuggestionClick(suggestion)}
+                      className={`w-full text-left px-4 py-3 transition-all duration-200 flex items-center gap-3 group
+                        ${isKeyboardSelected 
+                          ? 'bg-primary/10 border-l-2 border-primary' 
+                          : 'hover:bg-muted/50'
+                        }`}
+                    >
+                      <Search className={`w-4 h-4 transition-colors duration-200 ${
+                        isKeyboardSelected 
+                          ? 'text-primary' 
+                          : 'text-muted-foreground group-hover:text-primary'
+                      }`} />
+                      <span className={`${isCompact ? 'text-sm' : 'text-base'} transition-colors duration-200 ${
+                        isKeyboardSelected 
+                          ? 'text-primary font-medium' 
+                          : 'text-foreground group-hover:text-primary'
+                      }`}>
+                        {suggestion}
+                      </span>
+                      {searchHistory.includes(suggestion) && (
+                        <span className="ml-auto text-xs text-muted-foreground">Recent</span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+              
+              {/* Footer with keyboard hints */}
+              <div className="px-4 py-2 border-t border-border/30 bg-gray-50 dark:bg-gray-800">
+                <div className="flex items-center justify-between text-xs text-muted-foreground">
+                  <span>Use ↑↓ to navigate</span>
+                  <span>Press Enter to search</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      );
+    };
+
   if (isLoading) {
     return <LoadingAnimation />;
   }
@@ -233,12 +519,22 @@ export default function SearchInterface() {
               className="text-center mb-6 sm:mb-8"
             >
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
+                <motion.button
+                  onClick={handleLogoClick}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-12 h-12 sm:w-16 sm:h-16 bg-primary rounded-2xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-200"
+                >
                   <Search className="w-6 h-6 sm:w-9 sm:h-9 text-primary-foreground" />
-                </div>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-foreground tracking-tight">
+                </motion.button>
+                <motion.button
+                  onClick={handleLogoClick}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-foreground tracking-tight hover:text-primary transition-colors duration-200"
+                >
                   Discover Rohit
-                </h1>
+                </motion.button>
               </div>
             </motion.div>
 
@@ -257,14 +553,16 @@ export default function SearchInterface() {
                   <input
                     type="text"
                     value={currentQuery}
-                    onChange={(e) => setCurrentQuery(e.target.value)}
-                    placeholder="Search about Rohit's journey..."
-                    className="flex-1 px-3 sm:px-4 py-4 sm:py-5 text-base sm:text-lg bg-transparent text-foreground outline-none placeholder:text-muted-foreground"
-                    onKeyPress={(e) => {
-                      if (e.key === 'Enter' && currentQuery.trim()) {
-                        handleSearch(currentQuery);
+                    onChange={(e) => handleInputChange(e.target.value)}
+                    onKeyDown={(e) => handleKeyDown(e)}
+                    onFocus={() => {
+                      if (currentQuery.trim()) {
+                        setShowSuggestions(true);
                       }
                     }}
+                    placeholder="Search about Rohit's journey..."
+                    className="flex-1 px-3 sm:px-4 py-4 sm:py-5 text-base sm:text-lg bg-transparent text-foreground outline-none placeholder:text-muted-foreground"
+                    autoComplete="off"
                   />
                   <div className="pr-3 sm:pr-4">
                     <Button
@@ -277,6 +575,9 @@ export default function SearchInterface() {
                     </Button>
                   </div>
                 </div>
+                
+                {/* Suggestions dropdown for main search */}
+                <SuggestionsDropdown />
               </div>
             </motion.div>
 
@@ -332,43 +633,55 @@ export default function SearchInterface() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-background border-b backdrop-blur-sm border-border px-4 sm:px-6 pb-4 sm:pb-6"
+            className="bg-background border-b backdrop-blur-sm border-border px-4 sm:px-6 pb-4 sm:pb-6 relative z-40"
           >
             <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
               {/* Compact logo and search */}
-              <div className="flex items-center gap-3 sm:gap-4 w-full sm:w-auto">
+              <motion.button
+                onClick={handleLogoClick}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center gap-3 sm:gap-4 w-full sm:w-auto hover:opacity-80 transition-opacity duration-200"
+              >
                 <div className="w-6 h-6 sm:w-8 sm:h-8 bg-primary rounded-lg flex items-center justify-center">
                   <Search className="w-3 h-3 sm:w-5 sm:h-5 text-primary-foreground" />
                 </div>
                 <h1 className="text-lg sm:text-xl font-medium text-foreground">Discover Rohit</h1>
-              </div>
+              </motion.button>
               
               {/* Compact search bar */}
               <div className="flex-1 w-full sm:max-w-2xl">
-                <div className="flex items-center bg-card rounded-full border border-border shadow-sm hover:shadow-md transition-all duration-200 focus-within:shadow-md focus-within:border-primary/50">
-                  <div className="pl-3 sm:pl-4">
-                    <Search className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground" />
+                <div className="relative">
+                  <div className="flex items-center bg-card rounded-full border border-border shadow-sm hover:shadow-md transition-all duration-200 focus-within:shadow-md focus-within:border-primary/50">
+                    <div className="pl-3 sm:pl-4">
+                      <Search className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground" />
+                    </div>
+                    <input
+                      type="text"
+                      value={currentQuery}
+                      onChange={(e) => handleInputChange(e.target.value, true)}
+                      onKeyDown={(e) => handleKeyDown(e, true)}
+                      onFocus={() => {
+                        if (currentQuery.trim()) {
+                          setShowCompactSuggestions(true);
+                        }
+                      }}
+                      placeholder="Search about Rohit..."
+                      className="flex-1 px-2 sm:px-3 py-2 sm:py-3 text-xs sm:text-sm bg-transparent text-foreground outline-none placeholder:text-muted-foreground"
+                      autoComplete="off"
+                    />
+                    <Button
+                      onClick={() => currentQuery.trim() && handleSearch(currentQuery)}
+                      size="sm"
+                      className="mr-1 sm:mr-2 rounded-md bg-primary hover:bg-primary/90 text-primary-foreground px-2 sm:px-4 py-1 text-xs"
+                      disabled={!currentQuery.trim()}
+                    >
+                      Search
+                    </Button>
                   </div>
-                  <input
-                    type="text"
-                    value={currentQuery}
-                    onChange={(e) => setCurrentQuery(e.target.value)}
-                    placeholder="Search about Rohit..."
-                    className="flex-1 px-2 sm:px-3 py-2 sm:py-3 text-xs sm:text-sm bg-transparent text-foreground outline-none placeholder:text-muted-foreground"
-                    onKeyPress={(e) => {
-                      if (e.key === 'Enter' && currentQuery.trim()) {
-                        handleSearch(currentQuery);
-                      }
-                    }}
-                  />
-                  <Button
-                    onClick={() => currentQuery.trim() && handleSearch(currentQuery)}
-                    size="sm"
-                    className="mr-1 sm:mr-2 rounded-md bg-primary hover:bg-primary/90 text-primary-foreground px-2 sm:px-4 py-1 text-xs"
-                    disabled={!currentQuery.trim()}
-                  >
-                    Search
-                  </Button>
+                  
+                  {/* Suggestions dropdown for compact search */}
+                  <SuggestionsDropdown isCompact={true} />
                 </div>
               </div>
             </div>
@@ -415,7 +728,7 @@ export default function SearchInterface() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="max-w-5xl mx-auto mt-6 sm:mt-8 px-4 sm:px-6"
+            className="max-w-5xl mx-auto mt-6 sm:mt-8 px-4 sm:px-6 relative z-10"
           >
             <motion.div
               initial={{ scale: 0.95 }}
@@ -500,13 +813,13 @@ export default function SearchInterface() {
                               whileHover={{ scale: 1.2 }}
                               transition={{ type: "spring", stiffness: 400 }}
                             />
-                            <motion.span 
-                              className="text-sm sm:text-base text-foreground leading-relaxed group-hover/detail:text-foreground/90 transition-colors duration-300"
+                            <motion.div 
+                              className="text-sm sm:text-base text-foreground leading-relaxed group-hover/detail:text-foreground/90 transition-colors duration-300 flex flex-wrap items-center gap-1"
                               initial={{ opacity: 0.8 }}
                               whileHover={{ opacity: 1 }}
                             >
-                              {detail}
-                            </motion.span>
+                              {parseTextWithLinks(detail)}
+                            </motion.div>
                           </div>
                           
                           {/* Hover glow effect */}
@@ -514,38 +827,6 @@ export default function SearchInterface() {
                         </motion.div>
                       ))}
                     </div>
-
-                    {/* Interactive action buttons */}
-                    <motion.div 
-                      className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-border/30"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 1, duration: 0.5 }}
-                    >
-                      <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
-                        <motion.button
-                          whileHover={{ scale: 1.05, y: -1 }}
-                          whileTap={{ scale: 0.95 }}
-                          className="px-4 sm:px-6 py-2 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 hover:shadow-lg hover:shadow-primary/20"
-                        >
-                          Learn More
-                        </motion.button>
-                        <motion.button
-                          whileHover={{ scale: 1.05, y: -1 }}
-                          whileTap={{ scale: 0.95 }}
-                          className="px-4 sm:px-6 py-2 bg-muted hover:bg-muted/80 text-foreground border border-border rounded-full text-xs sm:text-sm font-medium transition-all duration-300 hover:shadow-lg"
-                        >
-                          View Details
-                        </motion.button>
-                        <motion.button
-                          whileHover={{ scale: 1.05, y: -1 }}
-                          whileTap={{ scale: 0.95 }}
-                          className="px-4 sm:px-6 py-2 bg-transparent hover:bg-accent text-muted-foreground hover:text-foreground border border-border/50 rounded-full text-xs sm:text-sm font-medium transition-all duration-300"
-                        >
-                          Share
-                        </motion.button>
-                      </div>
-                    </motion.div>
                   </div>
                 </CardContent>
               </Card>

@@ -42,12 +42,6 @@ export default function ContactBar() {
       color: "hover:bg-blue-500/10 hover:text-blue-600 hover:border-blue-500/30"
     },
     {
-      icon: <Contact className="w-3 h-3 sm:w-4 sm:h-4" />,
-      label: "Contact",
-      isContact: true,
-      color: "hover:bg-green-500/10 hover:text-green-600 hover:border-green-500/30"
-    },
-    {
       icon: <Download className="w-3 h-3 sm:w-4 sm:h-4" />,
       label: "Resume",
       href: "/Resume_Rohit_Shukla.pdf",
@@ -92,7 +86,7 @@ export default function ContactBar() {
   }
 
   return (
-    <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-40">
+    <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-[99999]">
       <motion.div 
         className="flex items-center gap-2 sm:gap-3"
         initial={{ opacity: 0, y: -20 }}
@@ -109,52 +103,6 @@ export default function ContactBar() {
               transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
               className="relative"
             >
-              {contact.isContact ? (
-                // Contact dropdown button
-                <div className="relative">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className={`rounded-full bg-card/80 backdrop-blur-sm border-border transition-all duration-200 w-8 h-8 sm:w-10 sm:h-10 ${contact.color}`}
-                    title={contact.label}
-                    onMouseEnter={() => setShowContactOptions(true)}
-                    onMouseLeave={() => setShowContactOptions(false)}
-                    onClick={() => setShowContactOptions(!showContactOptions)}
-                  >
-                    <motion.div
-                      whileHover={{ scale: 1.1, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      {contact.icon}
-                    </motion.div>
-                  </Button>
-                  
-                  {/* Contact dropdown */}
-                  {showContactOptions && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute top-12 right-0 bg-card/95 backdrop-blur-md border border-border rounded-lg shadow-lg p-1 min-w-[120px] z-50"
-                      onMouseEnter={() => setShowContactOptions(true)}
-                      onMouseLeave={() => setShowContactOptions(false)}
-                    >
-                      {contactOptions.map((option) => (
-                        <motion.a
-                          key={option.label}
-                          href={option.href}
-                          className="flex items-center gap-2 px-3 py-2 text-sm rounded-md hover:bg-muted transition-colors text-foreground"
-                          whileHover={{ x: 2 }}
-                        >
-                          {option.label}
-                        </motion.a>
-                      ))}
-                    </motion.div>
-                  )}
-                </div>
-              ) : (
-                // Regular buttons (LinkedIn, Resume)
                 <Button
                   asChild
                   variant="outline"
@@ -173,10 +121,9 @@ export default function ContactBar() {
                     {contact.icon}
                   </motion.a>
                 </Button>
-              )}
-            </motion.div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
+          </div>
 
         {/* Theme toggle button */}
         <motion.div

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, Coffee, Music, Code2, Gamepad2, Camera, X, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 const easterEggs = [
@@ -17,37 +16,30 @@ const easterEggs = [
   {
     icon: <Music className="w-5 h-5" />,
     title: "Coding Soundtrack 🎵",
-    content: "Currently vibing to: Lo-fi hip hop, Movie scores, and the occasional death metal (for those tricky bugs). Spotify Wrapped: 87,000 minutes of coding music.",
+    content: "Currently vibing to: Lo-fi hip hop. Spotify Wrapped: 87,000 minutes of coding music.",
     gradient: "from-purple-500 via-pink-500 to-rose-600",
     bgColor: "bg-purple-50 dark:bg-purple-950/20"
   },
   {
-    icon: <Code2 className="w-5 h-5" />,
-    title: "Side Projects 🚀",
-    content: "Built 47 side projects. 3 became profitable, 12 are still running, and 32 taught me valuable lessons. GitHub streak: 847 days and counting!",
-    gradient: "from-green-500 via-emerald-500 to-teal-600",
-    bgColor: "bg-green-50 dark:bg-green-950/20"
-  },
-  {
     icon: <Gamepad2 className="w-5 h-5" />,
     title: "Tech Enthusiast ⌨️",
-    content: "Mechanical keyboard enthusiast. Current board: Custom 65% with Gateron Oil Kings. Click-clack level: Expert. Also owns 3 different mice for different tasks.",
+    content: "PC hardware enthusiast. Currently on the roll to build his on setup.",
     gradient: "from-blue-500 via-indigo-500 to-purple-600",
     bgColor: "bg-blue-50 dark:bg-blue-950/20"
   },
   {
     icon: <Camera className="w-5 h-5" />,
     title: "Life Philosophy 💭",
-    content: "\"Code is poetry, bugs are typos, and every error message is just the computer's way of asking for help.\" Also believes in the power of rubber duck debugging.",
+    content: "\"Code is poetry, bugs are typos, and every error message is just the computer's way of asking for help.",
     gradient: "from-rose-500 via-pink-500 to-violet-600",
     bgColor: "bg-rose-50 dark:bg-rose-950/20"
   },
   {
     icon: <Sparkles className="w-5 h-5" />,
     title: "Random Facts ✨",
-    content: "Can solve a Rubik's cube in under 2 minutes. Owns 12 houseplants (all named after programming languages). Favorite debugging method: explaining code to my cat.",
-    gradient: "from-yellow-500 via-orange-500 to-red-500",
-    bgColor: "bg-yellow-50 dark:bg-yellow-950/20"
+    content: "Can solve a Rubik's cube in under 1 minute. Owns 12 houseplants (all named after programming languages). Favorite debugging method: explaining code to my keyboard.",
+    gradient: "from-green-500 via-emerald-500 to-teal-600",
+    bgColor: "bg-green-50 dark:bg-green-950/20"
   }
 ];
 
