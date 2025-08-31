@@ -27,7 +27,7 @@ const searchResults = {
     title: "Full-Stack Developer & Computer Science Student",
     description: "Software developer skilled in building full-stack applications using Next.js, Node.js, and Firebase. Strong foundation in both frontend and backend technologies with hands-on startup experience. Passionate about team-building, event organization, and leading initiatives.",
     details: [
-      "B.Sc. Computer Science student at Gujarat University (CGPA: 8.3)",
+      "B.Sc. Computer Science student at Gujarat University (CGPA: 8.0)",
       "Core Team Member at DaftarOS startup with full-stack development experience",
       "Freelance developer since 2022 serving startups and businesses",
       "Event organizer and leader with experience managing state-level techfests"
@@ -75,7 +75,7 @@ const searchResults = {
       "📱 Phone: [+91 9316331662](tel:+919316331662) - Available for direct calls and WhatsApp",
       "💼 LinkedIn: [rohit-shukla-a8729124b](https://www.linkedin.com/in/rohit-shukla-a8729124b/) - Connect for networking and opportunities",
       "🌐 Portfolio: [rohit-shukla-portfolio.vercel.app](https://rohit-shukla-portfolio.vercel.app) - This interactive portfolio website",
-      "📂 GitHub: [github.com/rohit-shukla](https://github.com/rohit-shukla) - Check out my code repositories and contributions",
+      "📂 GitHub: [github.com/Unsorted-Wings](https://github.com/Unsorted-Wings) - Check out my code repositories and contributions",
       "📍 Location: Ahmedabad, Gujarat, India - Open to remote work and local opportunities"
     ]
   },
@@ -84,10 +84,10 @@ const searchResults = {
     title: "Key Achievements & Leadership",
     description: "Academic excellence combined with leadership roles in organizing major events and representing the university at state-level platforms.",
     details: [
-      "� Maintaining 8.3 CGPA in B.Sc. Computer Science at Gujarat University",
-      "🏆 Lead Organizer for Tech Kaushalya 2024 - State-level techfest with team management", 
+      "📚 Maintaining 8.0 CGPA in B.Sc. Computer Science at Gujarat University",
+      "🏆 Lead Organizer for Tech Kaushalya 2024 - State-level techfest with team management",
       "🎯 Student Delegate at Vibrant Gujarat 2024 representing Gujarat University",
-      "👥 Multiple terms as Class Representative and college event organizer"
+      "🌱 Core Member of a startup incubated at [Gujarat University](https://www.gujaratuniversity.ac.in/)"
     ]
   },
   "Rohit's Work culture": {
